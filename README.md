@@ -1,21 +1,23 @@
 # Social Hub
 
-X, Instagram, TikTok, YouTube, Twitchを1つのデスクトップアプリにまとめるSNSブラウザです。
+Social Hub is a desktop social media browser that brings X, Instagram, TikTok, YouTube, and Twitch into one app.
 
-## 主な機能
+## Features
 
-- 1画面 / 左右2分割表示
-- SNSボタンのドラッグ&ドロップで左右画面へ配置
-- レイアウト、選択SNSの保存
-- 非表示SNSの動画/音声を自動停止
-- 外部ブラウザ fallback
-- キーボードショートカット
+- Single-pane and side-by-side split view
+- Drag and drop social buttons into the left or right pane
+- Persistent layout and selected service state
+- Automatic video/audio pause for hidden services
+- External browser fallback
+- Keyboard shortcuts
 
-## 開発環境のセットアップ
+## Development Setup
 
-ソースからビルド・起動するには [Node.js](https://nodejs.org/)（22以上推奨）と [Rust](https://www.rust-lang.org/tools/install) ツールチェーンが必要です（このアプリはTauri製で本体がRustで書かれているため）。
+To run or build the app from source, install [Node.js](https://nodejs.org/) and the [Rust](https://www.rust-lang.org/tools/install) toolchain. Node.js 22 or later is recommended.
 
-### Rustのインストール
+This app is built with Tauri, so Rust is required for the native desktop shell.
+
+### Install Rust
 
 #### macOS / Linux
 
@@ -23,7 +25,7 @@ X, Instagram, TikTok, YouTube, Twitchを1つのデスクトップアプリにま
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-インストール後、ターミナルを再起動するか以下で環境変数を読み込みます。
+After installation, restart your terminal or load the Rust environment variables:
 
 ```bash
 source "$HOME/.cargo/env"
@@ -31,80 +33,86 @@ source "$HOME/.cargo/env"
 
 #### Windows
 
-[rustup-init.exe](https://win.rustup.rs/) をダウンロードして実行するか、PowerShellで以下を実行します（Visual Studio C++ Build Toolsも必要です）。
+Download and run [rustup-init.exe](https://win.rustup.rs/), or run the following command in PowerShell.
+
+Visual Studio C++ Build Tools are also required.
 
 ```powershell
 winget install --id Rustlang.Rustup -e
 ```
 
-#### インストール確認（共通）
+#### Verify Installation
 
 ```bash
 rustc --version
 cargo --version
 ```
 
-### 依存パッケージのインストール
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-## 起動（開発モード）
+## Run in Development Mode
 
 ```bash
 npm run dev
 ```
 
-## ビルド
+## Build
 
-OSごとに、そのOS上でビルドします（クロスコンパイルは未対応）。
+Build the app on the same operating system as the target platform. Cross-compilation is not supported.
 
-### macOS版
+### macOS
 
-macOS上で実行します。
+Run this on macOS:
 
 ```bash
 npm install
 npm run build:app
 ```
 
-生成物:
+Output:
 
 ```text
 src-tauri/target/release/bundle/macos/Social Hub.app
 ```
 
-### Windows版
+### Windows
 
-Windows PC上で実行します。事前にNode.jsとRustをインストールしてください。
+Run this on a Windows PC after installing Node.js and Rust:
 
 ```bash
 npm install
 npm run build:windows
 ```
 
-生成物:
+Output:
 
 ```text
 src-tauri/target/release/bundle/msi/*.msi
 src-tauri/target/release/bundle/nsis/*.exe
 ```
 
-> macOS / Linux上で `npm run build:windows` を実行するとエラーになります（Windowsインストーラーはwin32環境でのみ作成可能）。
+> Running `npm run build:windows` on macOS or Linux will fail because Windows installers can only be produced in a Windows environment.
 
-#### GitHub Actionsで作る（Windows PCがない場合）
+#### Build with GitHub Actions
 
-`main` ブランチへの push 時に自動でWindowsビルドが走ります。手動で実行する場合は、GitHubの **Actions** タブから **Build Windows** ワークフローを選び **Run workflow** を実行します。完了後、Artifactsの `social-hub-windows` からインストーラー（`.msi` / `.exe`）をダウンロードできます。
+If you do not have a Windows PC, use GitHub Actions.
 
-## ショートカット
+The Windows build runs automatically when changes are pushed to the `main` branch. To run it manually, open the **Actions** tab on GitHub, select the **Build Windows** workflow, and click **Run workflow**.
 
-- `1` - `5`: 左画面へSNSを選択
-- `Shift + 1` - `Shift + 5`: 右画面へSNSを選択して2分割
-- `S`: 1画面 / 2分割を切り替え
-- `R`: 選択中画面を再読み込み
-- `O`: 選択中SNSを外部ブラウザで開く
+After the workflow finishes, download the `.msi` or `.exe` installer from the `social-hub-windows` artifact.
 
-## 制限
+## Shortcuts
 
-各SNSは公式Web版をWebViewで表示します。サービス側の仕様により、ログインや一部機能が制限される場合があります。
+- `1` - `5`: Select a service in the left pane
+- `Shift + 1` - `Shift + 5`: Select a service in the right pane and switch to split view
+- `S`: Toggle single-pane / split view
+- `R`: Reload the active pane
+- `O`: Open the active service in an external browser
+
+## Limitations
+
+Each service is displayed through its official web version inside a WebView. Depending on each service's restrictions, login behavior or some features may be limited.
