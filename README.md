@@ -13,7 +13,38 @@ X, Instagram, TikTok, YouTube, Twitchを1つのデスクトップアプリにま
 
 ## 開発環境のセットアップ
 
-[Node.js](https://nodejs.org/)（22以上推奨）と [Rust](https://www.rust-lang.org/tools/install) ツールチェーンが必要です。
+ソースからビルド・起動するには [Node.js](https://nodejs.org/)（22以上推奨）と [Rust](https://www.rust-lang.org/tools/install) ツールチェーンが必要です（このアプリはTauri製で本体がRustで書かれているため）。
+
+### Rustのインストール
+
+#### macOS / Linux
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+インストール後、ターミナルを再起動するか以下で環境変数を読み込みます。
+
+```bash
+source "$HOME/.cargo/env"
+```
+
+#### Windows
+
+[rustup-init.exe](https://win.rustup.rs/) をダウンロードして実行するか、PowerShellで以下を実行します（Visual Studio C++ Build Toolsも必要です）。
+
+```powershell
+winget install --id Rustlang.Rustup -e
+```
+
+#### インストール確認（共通）
+
+```bash
+rustc --version
+cargo --version
+```
+
+### 依存パッケージのインストール
 
 ```bash
 npm install
