@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Hub</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">SH</span>
+        <div>
+          <h1>Social Hub</h1>
+          <p>SNSを1つの窓にまとめるデスクトップアプリ</p>
+        </div>
+      </div>
+
+      <section class="panel controls">
+        <h2>表示モード</h2>
+        <div class="segmented">
+          <button id="single-mode-button" class="active" type="button">1画面</button>
+          <button id="split-mode-button" type="button">左右2分割</button>
+        </div>
+        <div class="pane-picker">
+          <span>変更する画面</span>
+          <div class="segmented">
+            <button id="left-pane-button" class="active" type="button">左</button>
+            <button id="right-pane-button" type="button">右</button>
+          </div>
+        </div>
+        <div class="drop-zones" aria-label="ドラッグ先">
+          <div id="left-drop-zone" class="drop-zone active" data-pane="left">
+            <span>左画面</span>
+            <strong id="left-drop-label">YouTube</strong>
+          </div>
+          <div id="right-drop-zone" class="drop-zone" data-pane="right">
+            <span>右画面</span>
+            <strong id="right-drop-label">Twitch</strong>
+          </div>
+        </div>
+        <p class="drag-help">SNSボタンをここへドラッグすると、その画面で開きます。</p>
+      </section>
+
+      <nav id="services" class="services" aria-label="SNSサービス"></nav>
+
+      <section class="panel">
+        <h2>主な機能</h2>
+        <ul>
+          <li>1画面 / 左右2分割を切り替え</li>
+          <li>左右それぞれに別SNSを表示</li>
+          <li>レイアウトと選択状態を保存</li>
+          <li>Web版へログイン</li>
+          <li>動画・タイムラインを同じアプリ内で表示</li>
+          <li>制限されたサイトは外部ブラウザで開く</li>
+        </ul>
+      </section>
+
+      <section class="panel muted">
+        <h2>注意</h2>
+        <p>
+          InstagramやTikTokなどは、WebView上のログインや表示を制限することがあります。
+          その場合でも、外部ブラウザへ逃がせる構成にしています。
+        </p>
+      </section>
+    </aside>
+
+    <main class="content-shell">
+      <header class="topbar">
+        <div>
+          <span id="status" class="status">準備中</span>
+          <h2 id="service-title">YouTube</h2>
+        </div>
+        <div class="actions">
+          <button id="reload-button" type="button">再読み込み</button>
+          <button id="open-button" type="button">外部ブラウザで開く</button>
+        </div>
+      </header>
+      <section class="shortcut-strip">
+        <span>1-5: 左へ表示</span>
+        <span>Shift+1-5: 右へ表示</span>
+        <span>S: 分割切替</span>
+      </section>
+      <div class="placeholder">
+        <div>
+          <strong>右側にSNSのWebViewが表示されます</strong>
+          <span>初回ログイン後は、同じアプリ内でセッションが保持されます。</span>
+        </div>
+      </div>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
