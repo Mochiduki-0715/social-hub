@@ -11,7 +11,15 @@ X, Instagram, TikTok, YouTube, Twitchを1つのデスクトップアプリにま
 - 外部ブラウザ fallback
 - キーボードショートカット
 
-## 起動
+## 開発環境のセットアップ
+
+[Node.js](https://nodejs.org/)（22以上推奨）と [Rust](https://www.rust-lang.org/tools/install) ツールチェーンが必要です。
+
+```bash
+npm install
+```
+
+## 起動（開発モード）
 
 ```bash
 npm run dev
@@ -19,7 +27,14 @@ npm run dev
 
 ## ビルド
 
+OSごとに、そのOS上でビルドします（クロスコンパイルは未対応）。
+
+### macOS版
+
+macOS上で実行します。
+
 ```bash
+npm install
 npm run build:app
 ```
 
@@ -29,9 +44,9 @@ npm run build:app
 src-tauri/target/release/bundle/macos/Social Hub.app
 ```
 
-## Windows版を作る
+### Windows版
 
-Windows PCまたはGitHub Actions上で以下を実行します。
+Windows PC上で実行します。事前にNode.jsとRustをインストールしてください。
 
 ```bash
 npm install
@@ -45,7 +60,11 @@ src-tauri/target/release/bundle/msi/*.msi
 src-tauri/target/release/bundle/nsis/*.exe
 ```
 
-GitHubに置く場合は、`.github/workflows/build-windows.yml` から手動実行するとWindows用インストーラーをArtifactsとして取得できます。
+> macOS / Linux上で `npm run build:windows` を実行するとエラーになります（Windowsインストーラーはwin32環境でのみ作成可能）。
+
+#### GitHub Actionsで作る（Windows PCがない場合）
+
+`main` ブランチへの push 時に自動でWindowsビルドが走ります。手動で実行する場合は、GitHubの **Actions** タブから **Build Windows** ワークフローを選び **Run workflow** を実行します。完了後、Artifactsの `social-hub-windows` からインストーラー（`.msi` / `.exe`）をダウンロードできます。
 
 ## ショートカット
 
